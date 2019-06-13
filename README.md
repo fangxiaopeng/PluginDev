@@ -46,8 +46,12 @@ dex文件                --> DexClassLoader
 5，通过DexClassLoader对象加载的Activity不具备生命周期，也不具备上下文。
 
 插件化实践思路
-1，
-
+1，宿主App和插件App都依赖pluginlib；
+2，插件Apk中Activity继承PluginActivity；
+3，将插件Apk下载到本地文件夹；
+4，创建DexClassLoader对象加载其dex文件，创建Resources对象加载其资源文件（图片、xml等）；
+5，启动插件Apk的ProxyActivity，传入目标Activity类名路径，然后在ProxyActivity中以反射的方式启动目标activity；
+6，在ProxyActivity生命周期中同步执行目标activity的生命周期，实现管理目标activity的生命周期；
 
 
 
